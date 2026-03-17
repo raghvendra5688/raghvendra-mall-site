@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dr. Raghvendra Mall | ML Researcher</title>
+<style>
+:root{--navy:#1a2744;--accent:#2563eb;--light:#f0f4ff;--muted:#64748b;--border:#e2e8f0;--white:#fff;--text:#1e293b;--radius:12px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:#f8fafc;line-height:1.65;}
+a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
+/* NAV */
+nav{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;flex-wrap:wrap;gap:6px;}
+.nav-brand{color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;white-space:nowrap;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;}
+.nav-links button{background:transparent;border:none;color:#cbd5e1;font-size:.82rem;padding:5px 10px;border-radius:6px;cursor:pointer;transition:background .2s,color .2s;font-family:inherit;}
+.nav-links button:hover,.nav-links button.active{background:rgba(255,255,255,.15);color:#fff;}
+/* PAGE */
+.page{display:none;}.page.active{display:block;}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1e3a8a 60%,#1d4ed8 100%);color:#fff;padding:64px 24px 52px;}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;}
+.badge:hover{background:rgba(255,255,255,.24);}
+.hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center;position:relative;z-index:1;}
+.avatar-wrap{width:156px;height:156px;border-radius:50%;border:4px solid rgba(255,255,255,.3);overflow:hidden;flex-shrink:0;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;}
+.avatar-icon{font-size:3.5rem;color:rgba(255,255,255,.5);}
+.hero-text h1{font-size:2rem;font-weight:700;margin-bottom:4px;}
+.hero-text .hindi{font-size:1.05rem;opacity:.65;margin-bottom:10px;}
+.hero-text .role{font-size:.97rem;opacity:.85;margin-bottom:18px;}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;padding:4px 13px;border-radius:20px;font-size:.8rem;transition:background .2s;cursor:pointer;}
+.badge:hover{background:rgba(255,255,255,.24);text-decoration:none;}
+.hero-text p{opacity:.88;font-size:.95rem;max-width:640px;}
+/* MAIN */
+main{max-width:1100px;margin:auto;padding:44px 22px;}
+section{margin-bottom:48px;}
+.sec-title{font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:9px;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:9px;}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:box-shadow .2s,transform .2s;}
+.card:hover{box-shadow:0 6px 22px rgba(37,99,235,.1);transform:translateY(-2px);}
+.ctag{display:inline-block;background:var(--light);color:var(--accent);font-size:.73rem;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:9px;text-transform:uppercase;letter-spacing:.05em;}
+.card h3{font-size:.97rem;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.card p{font-size:.86rem;color:var(--muted);}
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:13px;}
+.tl-item{display:flex;gap:14px;align-items:flex-start;}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0;}
+.tl-body{font-size:.91rem;}
+.tl-date{font-size:.76rem;color:var(--muted);font-weight:600;margin-bottom:2px;}
+/* PAPERS */
+.papers{display:flex;flex-direction:column;gap:14px;}
+.paper{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;border-left:4px solid var(--accent);}
+.paper .jrnl{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.paper h4{font-size:.93rem;font-weight:600;color:var(--navy);margin-bottom:3px;line-height:1.45;}
+.paper .if{font-size:.76rem;color:var(--muted);}
+/* EXP */
+.exp-item{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--border);}
+.exp-item:last-child{border:none;}
+.exp-year{font-size:.8rem;font-weight:700;color:var(--accent);min-width:90px;padding-top:2px;white-space:nowrap;}
+.exp-body h4{font-size:.95rem;font-weight:600;color:var(--navy);}
+.exp-body p{font-size:.85rem;color:var(--muted);margin-top:3px;}
+.exp-body .desc{font-size:.84rem;color:var(--text);margin-top:8px;line-height:1.6;}
+.exp-body ul{padding-left:18px;margin-top:6px;}
+.exp-body ul li{font-size:.84rem;color:var(--muted);margin-bottom:3px;}
+/* SKILLS */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.skill-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;}
+.skill-card h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.skill-card p{font-size:.82rem;color:var(--muted);}
+/* RESEARCH PROJECT */
+.proj{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:22px;}
+.proj-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:14px;}
+.proj-img{width:120px;height:80px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--light);}
+.proj h3{font-size:1.02rem;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.proj .pub-ref{font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+.proj p{font-size:.86rem;color:var(--text);line-height:1.65;}
+.proj .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.tag{background:var(--light);color:var(--accent);font-size:.74rem;padding:2px 10px;border-radius:20px;}
+/* PUBLIST */
+.pub-section{margin-bottom:32px;}
+.pub-section h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-left:10px;border-left:3px solid var(--accent);}
+.pub-list{list-style:decimal;padding-left:22px;display:flex;flex-direction:column;gap:9px;}
+.pub-list li{font-size:.86rem;color:var(--text);padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;line-height:1.55;}
+.pub-list li a{color:var(--accent);}
+.pub-star{color:#f59e0b;font-weight:700;}
+/* COLLAB */
+.collab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.collab-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;gap:14px;}
+.collab-icon{font-size:1.8rem;flex-shrink:0;}
+.collab-card h4{font-size:.93rem;font-weight:600;color:var(--navy);}
+.collab-card p{font-size:.82rem;color:var(--muted);margin-top:2px;}
+/* CODE */
+.code-proj{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:18px;display:grid;grid-template-columns:100px 1fr;gap:18px;align-items:flex-start;}
+.code-img{width:100px;height:70px;border-radius:8px;object-fit:cover;background:linear-gradient(135deg,#dbeafe,#e0f2fe);}
+.code-proj h4{font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.code-proj p{font-size:.84rem;color:var(--muted);margin-bottom:8px;}
+.code-proj ul{padding-left:16px;}
+.code-proj ul li{font-size:.82rem;color:var(--text);margin-bottom:2px;}
+/* CONTACT */
+.contact-box{background:linear-gradient(135deg,var(--light),#dbeafe);border:1px solid #bfdbfe;border-radius:var(--radius);padding:26px 28px;}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:18px;}
+.contact-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:6px;}
+.contact-item h4{font-size:.9rem;font-weight:700;color:var(--navy);}
+.contact-item a{font-size:.85rem;}
+/* KAGGLE */
+.medal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.medal-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;gap:12px;}
+.medal-icon{font-size:1.4rem;flex-shrink:0;}
+.medal-card h4{font-size:.9rem;font-weight:600;color:var(--navy);}
+.medal-card p{font-size:.8rem;color:var(--muted);}
+/* COLLAB-BOX */
+.collab-banner{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;border-radius:var(--radius);padding:22px 26px;font-size:.95rem;line-height:1.7;margin-bottom:32px;}
+/* AWARD */
+.award-item{display:flex;gap:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;}
+.award-icon{font-size:1.5rem;flex-shrink:0;}
+.award-item h4{font-size:.93rem;font-weight:600;color:var(--navy);}
+.award-item p{font-size:.82rem;color:var(--muted);}
+/* FOOTER */
+footer{background:var(--navy);color:#94a3b8;text-align:center;padding:24px 20px;font-size:.82rem;margin-top:40px;}
+footer a{color:#93c5fd;}
+@media(max-width:700px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;}
+  .avatar-wrap{margin:auto;}
+  .badges{justify-content:center;}
+  .hero-text p{margin:auto;}
+  .code-proj{grid-template-columns:1fr;}
+  .code-img{width:100%;height:120px;}
+  .proj-header{flex-direction:column;}
+  .proj-img{width:100%;height:120px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand" onclick="showPage('home')">Dr. Raghvendra Mall</div>
+    <div class="nav-links">
+      <button onclick="showPage('home')" id="nav-home" class="active">Home</button>
+      <button onclick="showPage('biography')" id="nav-biography">Biography</button>
+      <button onclick="showPage('research')" id="nav-research">Research</button>
+      <button onclick="showPage('publications')" id="nav-publications">Publications</button>
+      <button onclick="showPage('codes')" id="nav-codes">Codes</button>
+      <button onclick="showPage('collaborators')" id="nav-collaborators">Collaborators</button>
+      <button onclick="showPage('contact')" id="nav-contact">Reach Out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="avatar-wrap" style="width:160px;height:160px;border-radius:50%;overflow:hidden;flex-shrink:0;border:4px solid rgba(255,255,255,.3);box-shadow:0 4px 24px rgba(0,0,0,.4);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="Dr. Raghvendra Mall" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.parentNode.style.background='linear-gradient(135deg,#2563eb,#1e3a8a)';this.style.display='none';"/>
+      </div>
+      <div class="hero-text">
+        <h1>Dr. Raghvendra Mall</h1>
+        <div class="hindi">डॉ. राघवेंद्र मल्ल</div>
+        <div class="role">Senior Consultant, QCRI &nbsp;·&nbsp; Consultant, Mercor &nbsp;·&nbsp; IEEE Top-30 Early Career Professional 2024</div>
+        <div class="badges">
+          <a class="badge" href="https://scholar.google.com/citations?hl=en&user=CfwEb1EAAAAJ" target="_blank">📄 Google Scholar</a>
+          <a class="badge" href="https://www.researchgate.net/profile/Raghvendra_Mall" target="_blank">🔬 ResearchGate</a>
+          <a class="badge" href="https://orcid.org/0000-0003-1779-3150" target="_blank">🆔 ORCID</a>
+          <a class="badge" href="https://loop.frontiersin.org/people/1072179/overview" target="_blank">🔗 Loop</a>
+          <a class="badge" href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Raghvendra+Mall" target="_blank">🧬 PubMed</a>
+          <a class="badge" href="https://www.kaggle.com/raghvendrakul" target="_blank">📊 Kaggle</a>
+        </div>
+        <p>I design machine learning techniques for applied sciences — primarily <strong>computational biology</strong> and <strong>computational immunology</strong>. My team builds ML solutions across material sciences, chemistry, biology, and healthcare. I completed my doctorate <em>Summa Cum Laude</em> at KU Leuven, Belgium.</p>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="collab-banner">🤝 <strong>Open to Collaboration:</strong> Looking to work with <strong>M.S./PhD students</strong> on top-tier research at the intersection of <strong>AI + biologics</strong>. Also open to advising seed/funded startups in <strong>AI + biological sciences</strong> (cancer, infectious & non-communicable diseases).</div>
+
+    <section>
+      <div class="sec-title">📢 News & Highlights</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">February 2026</div>Seminar on <strong>AI for Computational BioMedicine</strong> at BioE Department, KFUPM.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">January 2026</div>Invited talk at <a href="https://ai4s.qcri.org/symposium" target="_blank">AI for Science Symposium</a> — QCRI & HBKU.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">November 2025</div>Keynote & Panel at <a href="https://drive.google.com/file/d/1duPzue1CAU9_duIrgHZ5kS-6aC2HV63y/view" target="_blank">AI, Cloud and Precision Health</a> — Qatar Precision Health Institute.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">2025</div>Named <strong>Strategic Advisor</strong> for pre-seed startup <a href="https://www.eternalplatform.com/" target="_blank">Eternal</a>.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">2024</div>Awarded <strong>"Computing's Top 30 Early Career Professionals"</strong> by <a href="https://www.computer.org/publications/tech-news/insider-membership-news/top-30-early-career-professionals-2024-honorees" target="_blank">IEEE Computer Society</a>.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">Ongoing</div>Elevated to <strong>Section Editor</strong>, Journal of Translational Medicine (Medical Bioinformatics) & <strong>Associate Editor</strong>, Frontiers in Medicine & Public Health.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">📑 Latest Publications</div>
+      <div class="papers">
+        <div class="paper"><div class="jrnl">Science Advances &nbsp;|&nbsp; IF 12.5 &nbsp;|&nbsp; 2026</div><h4>"Innate immune sensing of dietary alcohol ignites inflammation to drive alcohol-related disease"</h4><div class="if">Accepted, 2026</div></div>
+        <div class="paper"><div class="jrnl">Journal of Translational Medicine &nbsp;|&nbsp; IF 7.5 &nbsp;|&nbsp; 2026</div><h4><a href="https://link.springer.com/article/10.1186/s12967-025-07673-y" target="_blank">"B-cell epitope prediction in the age of machine learning: advancements and challenges"</a></h4></div>
+        <div class="paper"><div class="jrnl">Cell Chemical Biology &nbsp;|&nbsp; IF 7.2 &nbsp;|&nbsp; 2025</div><h4><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=CfwEb1EAAAAJ&sortby=pubdate&citation_for_view=CfwEb1EAAAAJ:DBa1UEJaJKAC" target="_blank">"A potent NLRP3 inhibitor effective against both MCC950-sensitive and-resistant inflammation"</a></h4></div>
+        <div class="paper"><div class="jrnl">Nature Communications &nbsp;|&nbsp; IF 14.7 &nbsp;|&nbsp; 2025</div><h4><a href="https://www.nature.com/articles/s41467-025-60226-1" target="_blank">"Ferroptosis-activating metabolite acrolein antagonizes necroptosis and anti-cancer therapeutics"</a></h4></div>
+        <div class="paper"><div class="jrnl">WIREs Computational Molecular Science &nbsp;|&nbsp; IF 16.8 &nbsp;|&nbsp; 2025</div><h4><a href="https://wires.onlinelibrary.wiley.com/doi/10.1002/wcms.70004" target="_blank">"Strategies for Redesigning Withdrawn Drugs to Enhance Therapeutic Efficacy and Safety"</a></h4></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">🏆 Competition Rankings</div>
+      <div class="medal-grid">
+        <div class="medal-card"><div class="medal-icon">🥈</div><div><h4>AIRR-ML-25 (Adaptive Immune Profiling)</h4><p>Ranked <strong>21/290 teams</strong> · Kaggle</p></div></div>
+        <div class="medal-card"><div class="medal-icon">🥈</div><div><h4>JigSaw – Community Rules 2025</h4><p>Ranked <strong>87/2,437</strong> (Top 3.5%, Silver) · Kaggle</p></div></div>
+        <div class="medal-card"><div class="medal-icon">🥈</div><div><h4>NeurIPS – Polymer Prediction 2025</h4><p>Team PolyBeasts · <strong>53/2,240</strong> (Top 2.5%, Silver) · Kaggle</p></div></div>
+        <div class="medal-card"><div class="medal-icon">🏅</div><div><h4>Autoimmune Disease ML (Crunch 2)</h4><p>Team Amari · <strong>4th</strong> globally · CrunchDAO</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">🛠️ Tools & Systems</div>
+      <div class="cards">
+        <div class="card"><div class="ctag">Web Server</div><h3>PAMPHLATE</h3><p>Peptide–HLA binding prediction.</p><br/><a href="http://ec2-35-170-123-194.compute-1.amazonaws.com:7861/" target="_blank">Launch</a></div>
+        <div class="card"><div class="ctag">Web Server</div><h3>VISH-Pred</h3><p>Protein & peptide toxicity prediction using ESM2 ensemble.</p><br/><a href="http://ec2-35-170-123-194.compute-1.amazonaws.com:7860/" target="_blank">Launch</a></div>
+        <div class="card"><div class="ctag">Platform</div><h3>QCRI ML for Proteins</h3><p>Solubility, crystallization & drug repurposing via deep learning.</p><br/><a href="https://machinelearning-protein.qcri.org/index.html" target="_blank">Explore</a></div>
+        <div class="card"><div class="ctag">R Package</div><h3>RGBM (CRAN)</h3><p>Regularized Gradient Boosting Machines for Gene Regulatory Network inference.</p><br/><a href="https://cran.r-project.org/web/packages/RGBM/index.html" target="_blank">CRAN</a></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== BIOGRAPHY ===== -->
+<div id="page-biography" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;position:relative;z-index:1;">
+      <div class="hero-text"><h1>Biography</h1><div class="hindi">जीवनी</div><p>Career trajectory spanning Belgium, Qatar, and the United States — from foundational ML research to translational computational biology.</p></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <div class="sec-title">💼 Work Experience</div>
+      <div class="exp-item">
+        <div class="exp-year">2025–Present</div>
+        <div class="exp-body">
+          <h4>Senior Consultant — QCRI &amp; Mercor</h4>
+          <p>Machine learning for computational biology and computational immunology.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">2023–2025</div>
+        <div class="exp-body">
+          <h4>Principal Scientist → Director — Technology Innovation Institute (TII), Abu Dhabi</h4>
+          <p>Biotechnology Research Center</p>
+          <div class="desc">Second hire to Executive Director; built a talent pipeline of 10+ computational biologists. Established collaboration with Caltech & Burjeel Cancer Institute for novel CAR-T cell therapy. Visited Caltech for knowledge acquisition and technology transfer in protein design. Secured AED 2.5M in recurrent annual funding for the CAR-T project. Designed fine-tuned protein language model solutions: VISH-Pred, PAMPHLATE, MATE-Pred — each outperforming SOTA by over 10% on MCC and F1-score. Led multi-omics mICRoScore study published in <em>Nature Medicine</em>.</div>
+          <ul>
+            <li>Mall et al. "VISH-Pred: an ensemble of fine-tuned ESM models for protein toxicity prediction." <em>Briefings in Bioinformatics</em>, 2024.</li>
+            <li>Goffinet, Mall et al. "System and Method for Predicting Protein Binding Using a Multi-Modal Prediction Model." U.S. Patent Application No. 18/959,940.</li>
+            <li>Roelands, Ruppen, Ahmed, Mall et al. "An integrated tumor, immune and microbiome atlas of colon cancer." <em>Nature Medicine</em>, 2023.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">2021–2023</div>
+        <div class="exp-body">
+          <h4>Senior Research Scientist — St. Jude Children's Research Hospital, Memphis, TN, USA</h4>
+          <div class="desc">Identified sensors, adapters, and effector molecules inducing inflammatory cell death (innate immunology) in response to pathogens and cancer. Designed data-driven integrative multiomics frameworks combining microarrays, RNA-Seq, CRISPR screens, and single-cell transcriptomics.</div>
+          <ul>
+            <li>Mall, Bynigeri et al. "Pancancer transcriptomic profiling identifies key PANoptosis markers." <em>NAR Cancer</em>, 2022.</li>
+            <li>Karki*, Lee*, Mall et al. "ZBP1-dependent PANoptosis and cytokine storm disrupt IFN efficacy during coronavirus infection." <em>Science Immunology</em>, 2022.</li>
+            <li>Sundaram*, Pandian*, Mall et al. "NLRP12-PANoptosome activates PANoptosis." <em>Cell</em>, 2023.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">2018–2021</div>
+        <div class="exp-body">
+          <h4>Research Scientist — Qatar Computing Research Institute (QCRI), Doha (U.S. equivalent: Asst. Prof.)</h4>
+          <div class="desc">Led drug sensitivity, drug repurposing and precision medicine research. Led Team Resham to top position in the CTD2-BeatAML Challenge. Developed ML framework identifying repurposable FDA-approved drugs for SARS-CoV-2 without 3D structure (identifying Ritonavir and Brilacidin).</div>
+          <ul>
+            <li>Mall et al. "A Modelling Framework for Embedding-based Predictions for Compound-Viral Protein Activity." <em>Bioinformatics</em>, 2021.</li>
+            <li>"Assessment of network module identification across complex diseases." <em>Nature Methods</em>, 2019.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">2016–2018</div>
+        <div class="exp-body">
+          <h4>Postdoctoral Researcher — QCRI, Doha, Qatar</h4>
+          <div class="desc">Applied data-driven ML for computational and network biology. Developed RGBM, DiffNet, and disease module identification tools. First groups to demonstrate deep learning for protein solubility (DeepSol, PaRSnIP) and crystallization (DeepCrystal).</div>
+          <ul>
+            <li>RGBM: <em>Nucleic Acids Research</em>, 2018.</li>
+            <li>"A metabolic function of FGFR3-TACC3 gene fusions in cancer." <em>Nature</em>, 2018.</li>
+            <li>DeepSol. <em>Bioinformatics</em>, 2018.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">🎓 Education</div>
+      <div class="exp-item">
+        <div class="exp-year">PhD 2015</div>
+        <div class="exp-body"><h4>KU Leuven, Belgium — <em>Summa Cum Laude</em></h4><p>Supervisor: Prof. Johan Suykens. Focus: sparsity in large-scale ML, kernel-based models for network analysis, supervised/unsupervised/semi-supervised learning, data visualization.</p></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">MS IIIT-H</div>
+        <div class="exp-body"><h4>International Institute of Information Technology, Hyderabad</h4><p>Research focus: frequent itemset-based classification and document clustering.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">🏅 Academic Achievements</div>
+      <div class="award-item"><div class="award-icon">🏆</div><div><h4>IEEE Computing's Top 30 Early Career Professionals 2024</h4><p>IEEE Computer Society</p></div></div>
+      <div class="award-item"><div class="award-icon">⭐</div><div><h4>5,350+ Citations</h4><p><a href="https://scholar.google.com/citations?user=CfwEb1EAAAAJ&hl=en" target="_blank">Google Scholar</a></p></div></div>
+      <div class="award-item"><div class="award-icon">🥇</div><div><h4>Winner — Anti-PD1 Dream Challenge</h4><p><a href="http://synapse.org/#!Synapse:syn18404605/wiki/607226" target="_blank">Synapse</a></p></div></div>
+      <div class="award-item"><div class="award-icon">🌟</div><div><h4>SuperNova of Q2 2023</h4><p>Biotechnology Research Center, TII, Abu Dhabi</p></div></div>
+      <div class="award-item"><div class="award-icon">📜</div><div><h4>Doctorate funded by European Research Council</h4><p>Finished with Summa Cum Laude. Appeared in Dean's List for 6 of 8 semesters.</p></div></div>
+      <div class="award-item"><div class="award-icon">🎖️</div><div><h4>Rank 1772/600,000 — AIEEE 2006</h4><p>Also Rank 70/100,000 in WBJEE 2006.</p></div></div>
+    </section>
+
+    <section>
+      <div class="sec-title">🔧 Skills</div>
+      <div class="skill-grid">
+        <div class="skill-card"><h4>Programming</h4><p>Python (advanced), R (advanced), C, C++, Java, Julia, MATLAB, Unix Shell</p></div>
+        <div class="skill-card"><h4>ML / DL Frameworks</h4><p>PyTorch, Keras, TensorFlow, Huggingface, PEFT, FAISS, Networkx</p></div>
+        <div class="skill-card"><h4>Cloud & Tools</h4><p>AWS, Google Cloud, Cytoscape, Gephi, VSCode, LaTeX, Vim</p></div>
+        <div class="skill-card"><h4>Databases & Web</h4><p>MySQL, SQLite, HTML, CSS, JavaScript, PHP</p></div>
+        <div class="skill-card"><h4>OS</h4><p>GNU/Linux (Fedora, Ubuntu, CentOS), Windows</p></div>
+        <div class="skill-card"><h4>Languages</h4><p>English, Hindi, Bengali, French (Notions)</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-title">🎓 Teaching Experience</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">KU Leuven, 2013 & 2014</div>Teaching Assistant — Artificial Neural Networks (Prof. Johan Suykens). Lab sessions & report correction.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">IIIT-H, 2010</div>Teaching Assistant — Software Engineering (Dr. Kirti Garg).</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">IIIT-H, 2009</div>Teaching Assistant — Artificial Intelligence (Prof. Rajeev Sanghal) and Science 1.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">INRIA, Loria Lab, France, 2010–2011</div>Research Intern under Prof. Jean-Charles Lamirel.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-date">Microsoft India R&D, Bangalore, 2011–2012</div>Research Intern.</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== RESEARCH ===== -->
+<div id="page-research" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
+      <div class="hero-text">
+        <h1>Areas of Interest</h1>
+        <div class="hindi">शोध क्षेत्र</div>
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="badge">Transformers for Personalized Biomedicine</span>
+          <span class="badge">AI-driven Immunotherapies (CAR-T / TCR-T / Cancer Vaccines)</span>
+          <span class="badge">Inflammatory Cell Death in Cancer</span>
+          <span class="badge">Deep Learning for Protein Properties</span>
+          <span class="badge">Computational Network Biology</span>
+          <span class="badge">Kernel Methods for Big Data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SSuZzn5nBYZTZCcVhASXYbpXmizy5oWQY2i95gufJ2DsuLBV8CA7IRKv-AFKoyqNQ5eMQ-c2AmVnAA7djhcz7-evF2bJ-ZiNWdixNALL5BEZ2V5vG2-P3qDWJtwB5e6VtehC0fNc-FQTYNEgjhJffClOHjzY3DtEwaRuKNHmDPvhV3kBGcXWRmQsBouDmCk9WM8H3vZ0oZaRb2lsZzJU6Ffo2h7q6HLhntHFG8=w400" alt="VISH-Pred" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>VISH-Pred: Protein Toxicity Prediction</h3>
+          <div class="pub-ref">Briefings in Bioinformatics, 2024 · <a href="http://ec2-35-170-123-194.compute-1.amazonaws.com:7860/" target="_blank">Web Server</a></div>
+        </div>
+      </div>
+      <p>An ensemble framework fine-tuning ESM2 transformer models on a large curated dataset of protein and peptide toxicities. VISH-Pred uses undersampling for class imbalance and LightGBM/XGBoost classifiers on ESM2 representations. Achieved MCC of 0.737 on blind tests, outperforming competing methods by over 10%.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">ESM2</span><span class="tag">XGBoost</span><span class="tag">LightGBM</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SQF3phuU-SQu9MhJig5jnKQNW-h8pxz-Pg5aVVtjNF87BN2POVOOojdXt0qiGd2p7z4Pms6d5N9BJ95jlQbVZMO_YfpJuf4jNal4sTVT3dK2XeA-FqELz0Wyv9R0eq2UST8kPMkdXzTu-yTmzrw2IaxjtpWWrMYOluWLAgu-oTw-IFljyRT3C7yQESarRondDoxuF4vvHZlyXpIhqr95O2W-fR5ATgXDyT87uw=w400" alt="PANoptosis" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>Comparative Analysis of PANoptosis Clusters in Cancer</h3>
+          <div class="pub-ref">Nature Scientific Reports, 2023 · <a href="https://doi.org/10.17632/7x237xf2m3.1" target="_blank">Data & Code →</a></div>
+        </div>
+      </div>
+      <p>Comprehensive comparison of genetic, genomic, tumor microenvironment and pathway characteristics between PANoptosis High/Low clusters in LGG, KIRC and SKCM. Found that proliferation pathway activation and aneuploidy differ significantly across PANoptosis clusters, informing targeted treatment selection.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">TCGA</span><span class="tag">Survival Analysis</span><span class="tag">Tumor Microenvironment</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SRrDZnL72pTHGyLf4NPWID6Dckus6pY1AYcSN0qjsL1irZHYUzg87f_29bBRxOcQjYaaIVVzJ3EQYsmli0p0towCKlTjnX8d5TtPfgLryWjbb74YRIDsmqxAKl7DeKaIPTf56bKnMzWaSnjkLm9vHvJlA--vt-ocE0QT6yKq8EfzWrtBH85rfemFkD7vjWi-EeNuXdTFghKS-ABdpSnQ2gBpWI4EvGFEUvx-GE=w400" alt="PANoptosis Pancancer" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>Pancancer PANoptosis Transcriptomic Profiling</h3>
+          <div class="pub-ref">NAR Cancer, 2022 · <a href="https://doi.org/10.17632/5drb9c5y9h.2" target="_blank">Data & Code</a></div>
+        </div>
+      </div>
+      <p>Systematic computational framework for pancancer clinical significance of PANoptosis. Identified ZBP1, ADAR, CASP2, CASP3, CASP4, CASP8 and GSDMD as consistently negative prognostic markers in LGG. Validated ZBP1-activating combination therapy inducing PANoptosis in melanoma cells as a therapeutic proof-of-concept.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">Bioinformatics</span><span class="tag">Innate Immunity</span><span class="tag">Cancer Genomics</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SRYQO8crsATKNZzC0yPnsDiollM3i7VGG6h7n729sBElU1wsQ46fyZIoCu5HNu-XSRgn9rjZVk1ufx8skqaGY37TDCx-UALhE_mkuq4-83Azirq008-PZI2D_PCn6faXPEUdlQgvzwa8zQgQGTCagWUO7_POw-pbiHYhyqf7W5Mf_vCaL7tSi8sG0AubMj44d4YO9BA2o_Pacvc9DFPI9CKfFMEOS0RFG3nGb0=w400" alt="DeepRepurpose" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>DeepRepurpose: Drug Repurposing for Viral Proteins</h3>
+          <div class="pub-ref">Bioinformatics, 2021 · <a href="https://github.com/raghvendra5688/Drug-Repurposing" target="_blank">GitHub</a> · <a href="https://machinelearning-protein.qcri.org/start.html" target="_blank">Web Server</a></div>
+        </div>
+      </div>
+      <p>Consensus embedding-based deep learning framework for compound-viral protein activity prediction (Pearson r = 0.916). Identified 47 compounds against SARS-CoV-2, including Ritonavir and Brilacidin, validated by molecular docking.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Graph Neural Networks</span><span class="tag">Drug Repurposing</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SRIOYAYmjTWofr-t58RrA3xTQYcG57OlAzFpgOJNV4FHIZykY0cvkRxC98OO9hE6ij1w0IaU0iA9Y57bMLfrjULVdWwdnySB-ls0U61rUejxXCW5jwnOFda4Qh4i_0aCjITbq5F8ije-kP972HaFn8we19BCBTak5QILieIxHOZw1cSoWHR0rIjUU6SOy2IWG3eUaDBRTl=w400" alt="DeepSol" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>DeepSol: Protein Solubility Prediction</h3>
+          <div class="pub-ref">Bioinformatics, 2018 · <a href="https://github.com/sameerkhurana10/DSOL_rv0.2" target="_blank">GitHub</a></div>
+        </div>
+      </div>
+      <p>CNN-based deep learning predictor for sequence-based protein solubility using frequent k-mers and biophysical features. Achieved accuracy of 0.77 and MCC of 0.55, outperforming all known SOTA methods at publication.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">CNN</span><span class="tag">Protein Bioinformatics</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <img class="proj-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SQKSDBK40EEOSkMN-wiJVYOQ5vroIeDtfa6sIF0_QjpwbnWHfZWdNq5h_TJe6GDE12ZG6KULEP7BYpoXBzSj3zZgM5FJb1jSW8qY5R_zXZqo4pFEOIucXYHlPXpoL9lBba4Y2nhdcJIgwk2Q4G0Aq2DbFPRvjzteAaG4lVhSfkzgmG5N1LIhvwi4AZg6LYB5mnmsvVib2TGbF_T9oOF5g-V-kfJlHCq-5gZ=w400" alt="ICR" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>Key Master Regulators of Immune-Silent Cancer</h3>
+          <div class="pub-ref">Briefings in Bioinformatics, 2021 · <a href="https://github.com/raghvendra5688/ICR_Analysis" target="_blank">GitHub</a></div>
+        </div>
+      </div>
+      <p>Network-based consensus pipeline (RGBM + ARACNE + FGSEA + GSVA + VIPER) to identify transcription regulators of immune-excluded tumors. Validated MRs including L3MBTL1, SALL2, BTRC across 20 cancers. Identified NOTCH1, TGF-β, IL-1 and TNF-α as therapeutic targets for immune conversion.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">TCGA</span><span class="tag">Network Biology</span><span class="tag">Cancer Immunology</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <div>
+          <h3>RGBM: Gene Regulatory Network Inference</h3>
+          <div class="pub-ref">Nucleic Acids Research, 2018 · <a href="https://cran.r-project.org/web/packages/RGBM/index.html" target="_blank">CRAN Package</a></div>
+        </div>
+      </div>
+      <p>Generic GRN inference framework using Tikonov regularization on gradient boosting machines. Outperforms ARACNE, GENIE, ENNET by 10–15% on DREAM challenge datasets. Used to identify master regulators of glioma subtypes and FGFR3-TACC3 fusions.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">CRAN Package</span><span class="tag">GBM</span><span class="tag">Gene Networks</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-header">
+        <div>
+          <h3>Netgram: Visualizing Evolving Communities</h3>
+          <div class="pub-ref">PLoS ONE, 2015 · <a href="https://www.esat.kuleuven.be/stadius/ADB/mall/softwareNetgram.php" target="_blank">Software</a></div>
+        </div>
+      </div>
+      <p>Post-processing visualization tool for evolutionary community detection in dynamic networks. Uses line-based visualization with greedy ordering to minimize cross-overs and tracks birth, death, merge, split and growth of communities.</p>
+      <div class="tags"><span class="tag">MATLAB</span><span class="tag">Dynamic Networks</span><span class="tag">Visualization</span></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== PUBLICATIONS ===== -->
+<div id="page-publications" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
+      <div class="hero-text"><h1>Publications</h1><div class="hindi">प्रकाशन</div><p>5,350+ citations · <a href="https://scholar.google.com/citations?hl=en&user=CfwEb1EAAAAJ" target="_blank" style="color:#93c5fd;">Google Scholar</a> &nbsp;·&nbsp; <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Raghvendra+Mall" target="_blank" style="color:#93c5fd;">PubMed</a><br/><small style="opacity:.7;">* equally contributing &nbsp;·&nbsp; + corresponding author &nbsp;·&nbsp; ★ high impact (IF &gt; 10)</small></p></div>
+    </div>
+  </div>
+  <main>
+    <div class="pub-section">
+      <h3>Book Chapters</h3>
+      <ol class="pub-list">
+        <li>Chirag N. Patel, <strong>Raghvendra Mall+</strong>. "Repurposing drugs for monkeypox using artificial intelligence." <em>The Scientific Basis of Mpox (MonkeyPox): Features, Prevention and Treatment</em>, Elsevier Academic Press, 2025.</li>
+        <li>Rocco Langone, <strong>Raghvendra Mall</strong>, Carlos Alzate and Johan A.K. Suykens. <a href="https://link.springer.com/chapter/10.1007/978-3-319-24211-8_6" target="_blank">"Kernel Spectral Clustering and Applications."</a> <em>Unsupervised Learning Algorithms</em>, Springer, 2016, pp. 135–161.</li>
+        <li><strong>Raghvendra Mall</strong>. <a href="https://lirias.kuleuven.be/bitstream/123456789/497378/1/thesis.pdf" target="_blank">"Sparsity in Large Scale Kernel Models."</a> PhD Dissertation, KU Leuven, June 2015.</li>
+        <li><strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "KSC-net: Community Detection for Big Data Networks." <em>Big Data: Algorithms, Analytics &amp; Applications</em>, CRC Press / Chapman &amp; Hall, 2015, pp. 157–174.</li>
+        <li>Rocco Langone, <strong>Raghvendra Mall</strong>, Joos Vandewalle and Johan A.K. Suykens. <a href="https://link.springer.com/chapter/10.1007/978-3-662-47824-0_1" target="_blank">"Discovering Cluster Dynamics Using Kernel Spectral Methods."</a> <em>Complex Systems and its Applications</em>, Springer, 2015, pp. 1–24.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Computational Immunology</h3>
+      <ol class="pub-list">
+        <li>Fabrizio Gabellieri, Ankita Singh, Sukrit Gupta, Halima Bensmail and <strong>Raghvendra Mall+</strong>. "B-cell epitope prediction in the age of machine learning: advancements and challenges." <em>Journal of Translational Medicine</em>, 2026.</li>
+        <li>Wonyoung Kim, Soyeon Kim, Hawon Woo, …, <strong>Raghvendra Mall</strong>, …, Benedicte F. Py et al. "A potent NLRP3 inhibitor effective against both MCC950-sensitive and-resistant inflammation." <em>Cell Chemical Biology</em>, 2025.</li>
+        <li>Siddhi P. Jani and <strong>Raghvendra Mall</strong>. "PT-AML: Machine Learning Framework to Identified Personalized Treatments for Acute Myeloid Leukemia." <em>CSCI</em>, pp. 386–396, Springer, 2025.</li>
+        <li>Hamda Alhosani*, <strong>Raghvendra Mall*</strong>, Ankita Singh and Filippo Castiglione. "ParAMeter Efficient Fine-Tuned Language Models for Peptide-HLA InTeraction PrEdiction." <em>CSCI</em>, pp. 358–373, Springer, 2025.</li>
+        <li>Etienne Goffinet, <strong>Raghvendra Mall</strong>, Ankita Singh, Filippo Castiglione, Fabrizio Gabellieri, Sen YAN and Haithem Boussaid. "System and Method for Predicting Protein Binding Using a Multi-Modal Prediction Model." U.S. Patent Application 18/959,940, filed May 29, 2025.</li>
+        <li>Hyun Bae, Seonghyun Moon, …, Chirag N. Patel, <strong>Raghvendra Mall</strong>, …, Rajendra Karki. <a href="https://www.nature.com/articles/s41467-025-60226-1" target="_blank">"Ferroptosis-activating metabolite acrolein antagonizes necroptosis and anti-cancer therapeutics."</a> <em class="pub-star">★ Nature Communications</em> 16, 4919, 2025.</li>
+        <li>Kumar, Sivakumar Prasanth, …, <strong>Raghvendra Mall</strong>, Andrew F. Neuwald and Thirumala-Devi Kanneganti. <a href="https://academic.oup.com/mbe/article/42/5/msaf096/8119845" target="_blank">"Evolutionary and functional analysis of caspase-8 and ASC interactions to drive lytic cell death, PANoptosis."</a> <em>Molecular Biology and Evolution</em> 42, no. 5, 2025.</li>
+        <li>Chirag N. Patel, Adeeba Shakeel, <strong>Raghvendra Mall</strong>, …, Alex Zhavoronkov and Filippo Castiglione. <a href="https://wires.onlinelibrary.wiley.com/doi/10.1002/wcms.70004" target="_blank">"Strategies for Redesigning Withdrawn Drugs to Enhance Therapeutic Efficacy and Safety: A Review."</a> <em class="pub-star">★ WIREs Computational Molecular Science</em> 15, no. 1, e70004, 2025.</li>
+        <li><strong>Raghvendra Mall+</strong>, Rahul Kaushik, Zachary A. Martinez, Matt W. Thomson and Filippo Castiglione+. "Benchmarking protein language models for protein crystallization." <em>Scientific Reports</em> 15, no. 1, 2381, 2025.</li>
+        <li>Hamda Alhosani, <strong>Raghvendra Mall</strong>, Ankita Singh and Filippo Castiglione. "FEATURE-pHLA: Physico-chemical features efficiently predict peptide-HLA binding affinity." <em>IEEE BIBM</em>, 2024.</li>
+        <li>Laurel K. Berry, Ashok K. Pullikuth, …, <strong>Raghvendra Mall</strong>, …, Lance D. Miller. "A patient stratification signature mirrors the immunogenic potential of high grade serous ovarian cancers." <em>Journal of Translational Medicine</em> 22, no. 1, 1048, 2024.</li>
+        <li>Balamurugan Sundaram, Nagakannan Pandian, Hee Jin Kim, Hadia M. Abdelaal, <strong>Raghvendra Mall</strong>, … Rajendra Karki et al. <a href="https://www.cell.com/cell/fulltext/S0092-8674%2824%2900578-6" target="_blank">"NLRC5 senses NAD+ depletion, forming a PANoptosome and driving PANoptosis and inflammation."</a> <em class="pub-star">★ Cell</em>, 2024.</li>
+        <li><strong>Raghvendra Mall+</strong>, Ankita Singh, Chirag N. Patel, Gregory Guirimand, Filippo Castiglione. <a href="https://academic.oup.com/bib/article/25/4/bbae270/7688816" target="_blank">"VISH-Pred: an ensemble of ESM models for protein toxicity prediction."</a> <em>Briefings in Bioinformatics</em> 25.4, 2024.</li>
+        <li>Ratnakar R. Bynigeri, RK Subbarao Malireddi, <strong>Raghvendra Mall</strong>, …, Thirumala-Devi Kanneganti. <a href="https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-024-01901-5" target="_blank">"The protein phosphatase PP6 promotes RIPK1-dependent PANoptosis."</a> <em>BMC Biology</em> 22.1, 122, 2024.</li>
+        <li>Joo-Hui Han, Rajendra Karki, R.K.S. Malireddi, <strong>Raghvendra Mall</strong>, et al. <a href="https://www.nature.com/articles/s41467-024-45466-x" target="_blank">"NINJ1 mediates inflammatory cell death, PANoptosis, and lethality during infection conditions and heat stress."</a> <em class="pub-star">★ Nature Communications</em> 15, 1739, 2024.</li>
+        <li>Mike Mason, …, <strong>Raghvendra Mall</strong>, …, Jacob Kaufman et al. <a href="https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-023-04705-3" target="_blank">"A community challenge to predict clinical outcomes after immune checkpoint blockade in non-small cell lung cancer."</a> <em>Journal of Translational Medicine</em> 22, no. 1, 2024.</li>
+        <li><strong>Raghvendra Mall</strong> and Thirumala-Devi Kanneganti. <a href="https://www.nature.com/articles/s41598-023-48098-1" target="_blank">"Comparative Analysis Identifies Genetic and Molecular Factors associated with Prognostic Clusters of PANoptosis in Glioma, Kidney and Melanoma Cancer."</a> <em>Scientific Reports</em>, 2023.</li>
+        <li>Mahesh Jethalia, Siddhi P. Jani, Michele Ceccarelli, <strong>Raghvendra Mall+</strong>. "Pancancer Network Analysis Reveals Key Master Regulators For Cancer Invasiveness." <em>JTRM</em>, 2023.</li>
+        <li>Balamurugan Sundaram*, Nagakannan Pandian*, <strong>Raghvendra Mall</strong>, Yaqiu Wang, Roman Sarkar, Hee Jin Kim, RK Subbarao Malireddi et al. <a href="https://www.sciencedirect.com/science/article/pii/S009286742300524X" target="_blank">"NLRP12-PANoptosome activates PANoptosis and pathology in response to heme and PAMPs."</a> <em class="pub-star">★ Cell</em>, 2023.</li>
+        <li>Malireddi, RK Subbarao*, Ratnakar R. Bynigeri*, <strong>Raghvendra Mall</strong>, …, Thirumala-Devi Kanneganti. <a href="https://www.cell.com/iscience/pdf/S2589-0042%2823%2901015-5.pdf" target="_blank">"Whole-genome CRISPR screen identifies RAVER1 regulates RIPK1-mediated inflammatory cell death, PANoptosis."</a> <em>iScience</em>, 2023.</li>
+        <li>Jessica Roelands, Peter JK Kuppen, Eiman I. Ahmed, <strong>Raghvendra Mall</strong>, …, Gianni Monaco et al. <a href="https://www.nature.com/articles/s41591-023-02324-5" target="_blank">"An integrated tumor, immune and microbiome atlas of colon cancer."</a> <em class="pub-star">★ Nature Medicine</em>, 2023.</li>
+        <li>Chirag N. Patel, <strong>Raghvendra Mall+</strong>, Halima Bensmail+. <a href="https://www.sciencedirect.com/science/article/pii/S1876034123000722" target="_blank">"AI-driven drug repurposing and binding pose meta dynamics identifies novel targets for monkeypox virus."</a> <em>Journal of Infection and Public Health</em> 16, Issue 5, 799–807, 2023.</li>
+        <li><strong>Raghvendra Mall</strong>, Ratnakar R. Bynigeri, Rajendra Karki, RK Subbarao Mallireddi, Bhesh Raj Sharma, Thirumala-Devi Kanneganti. <a href="https://doi.org/10.1093/narcan/zcac033" target="_blank">"Pancancer transcriptomic profiling identifies key PANoptosis markers as therapeutic targets for oncology."</a> <em>NAR Cancer</em> 4, Issue 4, zcac033, 2022.</li>
+        <li><strong>Raghvendra Mall*</strong>, Shimaa Sherif*, …, Wouter Hendrickx, Julie Decock. <a href="https://rdcu.be/cWH7S" target="_blank">"Immune-related 3-lncRNA signature with prognostic connotation in a multi-cancer setting."</a> <em>Journal of Translational Medicine</em> 20(442), 2022.</li>
+        <li>Rajendra Karki*, Sangjoon Lee*, <strong>Raghvendra Mall</strong>, …, Thirumala-Devi Kanneganti. <a href="https://www.science.org/doi/epdf/10.1126/sciimmunol.abo6294" target="_blank">"ZBP1-dependent inflammatory cell death, PANoptosis, and cytokine storm disrupt IFN therapeutic efficacy during coronavirus infection."</a> <em class="pub-star">★ Science Immunology</em>, 2022.</li>
+        <li>Yaqiu Wang, Rajendra Karki, <strong>Raghvendra Mall</strong>, …, Thirumala-Devi Kanneganti. <a href="https://www.cell.com/cell-reports/fulltext/S2211-1247%2822%2901275-X" target="_blank">"Molecular mechanism of RIPK1 and caspase-8 in homeostatic type I interferon production and regulation."</a> <em>Cell Reports</em>, 2022.</li>
+        <li>Claudio Vernieri, …, <strong>Raghvendra Mall</strong>, …, Filippo de Braud. <a href="https://cancerdiscovery.aacrjournals.org/content/early/2021/11/11/2159-8290.CD-21-0030" target="_blank">"Fasting-mimicking diet is safe and reshapes metabolism and antitumor immunity in cancer patients."</a> <em>Cancer Discovery</em>, 2021.</li>
+        <li><strong>Raghvendra Mall+</strong>, Mohamad Saad, Jessica Roelands, …, Michele Ceccarelli and Davide Bedognetti. <a href="https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbab168/6274817" target="_blank">"Network-based identification of key master regulators associated with an immune-silent cancer phenotype."</a> <em>Briefings in Bioinformatics</em>, 2021.</li>
+        <li>Jessica Roelands, Wouter Hendrickx, …, <strong>Raghvendra Mall</strong>, …, Davide Bedognetti. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7223637/" target="_blank">"Oncogenic states dictate the prognostic and predictive connotations of intratumoral immune response."</a> <em>Journal for Immunotherapy of Cancer</em> 8(1), e000617, 2020.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Computational Biology and Bioinformatics</h3>
+      <ol class="pub-list" start="30">
+        <li>Mir, Fayaz, Ehsan Ullah, Ahmad Iskandarani, <strong>Raghvendra Mall</strong>, …, Abdul-Badi Abou-Samra. "Comprehensive Analysis of Serum Metabolites and Whole Blood Cell Transcriptome reveals the Dysregulated Metabolic Pathways in Metabolically Healthy Obesity." 2024.</li>
+        <li><strong>Raghvendra Mall*</strong>, Fayaz A. Mir*, Ehsan Ullah*, …, Abdul-Badi Abou Samra. <a href="https://link.springer.com/epdf/10.1186/s12967-023-04074-x" target="_blank">"An integrated multi-omic approach demonstrates distinct molecular signatures between human obesity with and without metabolic complications."</a> <em>Journal of Translational Medicine</em>, 2023.</li>
+        <li><strong>Raghvendra Mall*</strong>, Fayaz A. Mir*, …, Abdul-Badi Abou-Samra. <a href="https://www.frontiersin.org/articles/10.3389/fendo.2022.937089/abstract" target="_blank">"Characteristic MicroRNAs linked to dysregulated metabolic pathways in Qatari adult subjects with obesity and metabolic syndrome."</a> <em>Frontiers in Endocrinology</em>, 2022.</li>
+        <li>Fayaz Ahmad Mir*, Ehsan Ullah*, <strong>Raghvendra Mall</strong>, …, Abdul-Badi Abou-Samra. <a href="https://www.mdpi.com/1422-0067/23/17/9821" target="_blank">"Dysregulated Metabolic Pathways in Subjects with Obesity and Metabolic Syndrome."</a> <em>International Journal of Molecular Sciences</em> 23, no. 17, 9821, 2022.</li>
+        <li><strong>Raghvendra Mall+</strong>, Abdurrahman Elbasir, Hossam Almeer, Zeyaul Islam, Prasanna R. Kolatkar, Sanjay Chawla and Ehsan Ullah. <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btab130/6151691" target="_blank">"A Modelling Framework for Embedding-based Predictions for Compound-Viral Protein Activity."</a> <em>Bioinformatics</em>, btab130, 2021.</li>
+        <li>Jessica Roelands, <strong>Raghvendra Mall</strong>, …, Wouter Hendrickx and Julie Decock. <a href="https://www.nature.com/articles/s41523-021-00215-x" target="_blank">"Ancestry-associated transcriptomic profiles of breast cancer in patients of African, Arab and European ancestry."</a> <em>NPJ Breast Cancer</em> 7, no. 1, 2021.</li>
+        <li>Zeyaul Islam, Mohamed H. Ali, Anton Popelka, <strong>Raghvendra Mall</strong>, Ehsan Ullah, …, Prasanna R. Kolatkar. <a href="https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1734091" target="_blank">"Probing the fibrillation of lysozyme by nanoscale infrared spectroscopy."</a> <em>Journal of Biomolecular Structure and Dynamics</em>, 2020.</li>
+        <li>Abdurrahman Elbasir, <strong>Raghvendra Mall+</strong>, Khalid Kunji, Reda Rawi, …, Halima Bensmail. <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btz762/5585746" target="_blank">"BCrystal: An Interpretable Sequence-Based Protein Crystallization Predictor."</a> <em>Bioinformatics</em>, btz762, 2020.</li>
+        <li>Reda Rawi, <strong>Raghvendra Mall</strong>, Chen-Hsiang Shen, …, Peter D. Kwong and Gwo-Yu Chuang. <a href="https://www.nature.com/articles/s41598-019-50635-w" target="_blank">"Accurate prediction of antibody resistance in clinical HIV-1 isolates."</a> <em>Scientific Reports</em> 9, 14696, 2019.</li>
+        <li>Sarvenaz Choobdar, …, The DREAM Module Identification Challenge Consortium, …, Daniel Marbach. <a href="https://www.nature.com/articles/s41592-019-0509-5" target="_blank">"Assessment of network module identification across complex diseases."</a> <em class="pub-star">★ Nature Methods</em> 16(9), 843–852, 2019.</li>
+        <li>Ehsan Ullah*, <strong>Raghvendra Mall*</strong>, Mostafa M. Abbas*, Khalid Kunji*, …, Mohamad Saad. <a href="https://genome.cshlp.org/content/early/2018/12/04/gr.236315.118.abstract" target="_blank">"Comparison and assessment of family- and population-based genotype imputation methods in large pedigrees."</a> <em>Genome Research</em>, 2018.</li>
+        <li>Abdurrahman Elbasir, Balasubramanian Moovarkumudalvan, Khalid Kunji, …, Halima Bensmail, <strong>Raghvendra Mall+</strong>. <a href="https://doi.org/10.1093/bioinformatics/bty953" target="_blank">"DeepCrystal: A Deep Learning Framework for Sequence-based Protein Crystallization Prediction."</a> <em>Bioinformatics</em>, bty953, 2018.</li>
+        <li>Mohamed Ali, Fazle Rakib, Essam M. Abdelalim, <strong>Raghvendra Mall</strong>, Ehsan Ullah, …, Andreas Limbeck. <a href="https://www.frontiersin.org/articles/10.3389/fnins.2018.00647/abstract" target="_blank">"Fourier-Transform Infrared Imaging spectroscopy and Laser ablation-ICMPS new vistas for biochemical analyses of ischemic stroke in rat brain."</a> <em>Frontiers in Neuroscience</em>, 2018.</li>
+        <li>Sameer Khurana, Reda Rawi, Khalid Kunji, Gwo-Yu Chuang, Halima Bensmail and <strong>Raghvendra Mall+</strong>. <a href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty166/4938490" target="_blank">"DeepSol: A Deep Learning Framework for Sequence-Based Protein Solubility Prediction."</a> <em>Bioinformatics</em>, bty166, 2018.</li>
+        <li><strong>Raghvendra Mall+</strong>, Luigi Cerulo, Luciano Garofano, …, Antonio Iavarone, Michele Ceccarelli. <a href="https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gky015/4817397" target="_blank">"RGBM: Regularized Gradient Boosting Machines for Identification of The Transcriptional Regulators of Discrete Glioma Subtypes."</a> <em>Nucleic Acids Research</em>, gky015, 2018.</li>
+        <li>Veronique Frattini, Stefano M. Pagnotta, …, <strong>Raghvendra Mall</strong>, …, Michele Ceccarelli, Anna Lasorella and Antonio Iavarone. <a href="https://www.nature.com/articles/nature25171" target="_blank">"A metabolic function associated with FGFR3-TACC3 gene fusions."</a> <em class="pub-star">★ Nature</em>, 2018.</li>
+        <li>Reda Rawi, <strong>Raghvendra Mall</strong>, Khalid Kunji, Chen-Hsiang Shen, Peter D. Kwong, Gwo-Yu Chuang. <a href="https://academic.oup.com/bioinformatics/article-abstract/doi/10.1093/bioinformatics/btx662/4562500" target="_blank">"PaRSnIP: Sequence-Based Protein Solubility Prediction using Gradient Boosting Machine."</a> <em>Bioinformatics</em>, btx662, 2017.</li>
+        <li><strong>Raghvendra Mall+</strong>, Ehsan Ullah, Khalid Kunji, Fulvio D'Angelo, Halima Bensmail and Michele Ceccarelli. <a href="https://dl.acm.org/citation.cfm?id=3107418" target="_blank">"Differential Community Detection for paired biological networks."</a> <em>ACM-BCB</em>, Boston, 2017.</li>
+        <li><strong>Raghvendra Mall+</strong>, Luigi Cerulo, Halima Bensmail, Antonio Iavarone and Michele Ceccarelli. <a href="http://rdcu.be/pNMS" target="_blank">"Detection of statistically significant network changes in complex biological networks."</a> <em>BMC Systems Biology</em> 11:32, 2017.</li>
+        <li>Reda Rawi, <strong>Raghvendra Mall</strong>, Khalid Kunji, …, Ehsan Ullah and Halima Bensmail. <a href="http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1400-3" target="_blank">"COUSCOus: improved protein contact prediction using an empirical Bayes covariance estimator."</a> <em>BMC Bioinformatics</em> 17:533, 2016.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Health Informatics</h3>
+      <ol class="pub-list" start="1">
+        <li>Mostafa Abbas, <strong>Raghvendra Mall</strong>, …, Abdelilah Arredouani. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jdi.13445" target="_blank">"PRISQ: a simple risk score to screen for prediabetes: a cross-sectional study from the Qatar Biobank Cohort."</a> <em>Journal of Diabetes Investigation</em>, 2020.</li>
+        <li>Tarik Elhadd*, <strong>Raghvendra Mall*</strong>, …, Rayaz A. Malik and Abdul Badi Abou-Samra. <a href="https://www.diabetesresearchclinicalpractice.com/article/S0168-8227%2820%2930641-0/fulltext" target="_blank">"AI based machine learning models predict glucose variability and hypoglycaemia risk in patients with type 2 diabetes on a multiple drug regimen who fast during Ramadan (The PROFAST–IT Ramadan study)."</a> <em>Diabetes Research and Clinical Practice</em> 169, 108388, 2020.</li>
+        <li>Ignacio Perez-Pozuelo, Bing Zhai, Joao Palotti, <strong>Raghvendra Mall</strong>, …, Luis Fernandez-Luque. <a href="https://www.nature.com/articles/s41746-020-0244-4" target="_blank">"The future of sleep health: a data-driven revolution in sleep science and medicine."</a> <em>npj Digital Medicine</em> 3:42, 2020.</li>
+        <li>Joao Palotti, <strong>Raghvendra Mall</strong>, Michael Aupetit, …, Shahrad Taheri and Luis Fernandez-Luque. <a href="https://www.nature.com/articles/s41746-019-0126-9" target="_blank">"Benchmark on a large cohort for sleep-wake classification with machine learning techniques."</a> <em>npj Digital Medicine</em> 2, no. 1, 50, 2019.</li>
+        <li><strong>Raghvendra Mall*</strong>, Ehsan Ullah*, Reda Rawi, Naima M. Moustaid, Adeel A. Butt and Halima Bensmail. <a href="https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-018-1472-0" target="_blank">"Harnessing Qatar Biobank to Understand Type 2 Diabetes and Obesity in Adult Qataris from First Qatar Biobank Project."</a> <em>Journal of Translational Medicine</em> 16:09, 2018.</li>
+        <li><strong>Raghvendra Mall</strong>, Reda Rawi et al. <a href="https://www.omicsonline.org/open-access/application-of-highdimensional-statistics-and-network-based-visualizationtechniques-on-arab-diabetes-and-obesity-data-2157-7420-1000257.pdf" target="_blank">"Application of High-Dimensional Statistics and Network based Visualization techniques on Arab Diabetes and Obesity Data."</a> <em>Journal of Health and Medical Informatics</em> 8:2, 2017.</li>
+        <li>Ehsan Ullah, <strong>Raghvendra Mall</strong>, Reda Rawi and Halima Bensmail. "Statistical and Network Analysis of Metabolomics Data." <em>CNB-MAC Workshop at ACM-BCB</em>, 2016.</li>
+        <li><strong>Raghvendra Mall</strong>, Laure Berti and Halima Bensmail. "Metabolomic Data Profiling to Diabetes Research in Qatar." <em>Bio-KDD Workshop at DEXA</em>, 2016.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Material Sciences</h3>
+      <ol class="pub-list" start="1">
+        <li>Heesoo Park, Adnan Ali, <strong>Raghvendra Mall</strong>, Halima Bensmail, Stefano Sanvito and Fadwa El-Mellouhi. "Data-driven Enhancement of Cubic Phase Stability in Mixed-Cation Perovskites." <em>Machine Learning: Science and Technology</em>, 2021.</li>
+        <li>Heesoo Park, <strong>Raghvendra Mall</strong>, Adnan Ali, Stefano Sanvito, Halima Bensmail, Fedwa El-Mellouhi. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0927025620303499" target="_blank">"Importance of structural deformation features in the prediction of hybrid perovskite bandgaps."</a> <em>Computational Materials Science</em> 184, 109858, 2020.</li>
+        <li>Adnan Ali, Heesoo Park, <strong>Raghvendra Mall</strong>, Brahim Aïssa, Stefano Sanvito, Halima Bensmail, Abdelhak Belaidi and Fedwa El-Mellouhi. <a href="https://pubs.acs.org/doi/abs/10.1021/acs.chemmater.9b05342" target="_blank">"Machine-Learning-Accelerated Recovery of the Cubic Structure in Mixed Cation Perovskite Thin Films."</a> <em>Chemistry of Materials</em>, 2020.</li>
+        <li>Heesoo Park, <strong>Raghvendra Mall</strong>, Fahhad H. Alharbi, Stefano Sanvinto, Nouar Tabet, Halima Bensmail and Fadwa El-Mellouhi. <a href="https://pubs.acs.org/doi/10.1021/acs.jpca.9b06208" target="_blank">"Learn-and-Match Molecular Cations for Perovskites."</a> <em>Journal of Physical Chemistry A</em> 123:33, 7323–7334, 2019.</li>
+        <li>Heesoo Park, <strong>Raghvendra Mall</strong>, Fahhad H. Alharbi, Stefano Sanvinto, Nouar Tabet, Halima Bensmail and Fadwa El-Mellouhi. <a href="https://pubs.rsc.org/en/content/articlelanding/2014/CP/C8CP06528D" target="_blank">"Exploring New Approaches towards the Formability of Mixed-Ion Perovskite by DFT and Machine Learning."</a> <em>Physical Chemistry Chemical Physics</em>, 2018.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Data Visualization</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0137502" target="_blank">"Netgram: Visualizing Communities in Evolving Networks."</a> <em>PLoS One</em>, e0137502, vol. 10, no. 9, 2015.</li>
+        <li>Adrian Baland, <strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Visualization of Hierarchical Communities in Large Scale Networks." <em>IEEE VIS</em>, pp. 1–2, 2015.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Sparse Kernel Methods for Classification</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong> and Johan A.K. Suykens. <a href="https://ieeexplore.ieee.org/document/7052376" target="_blank">"Very Sparse LSSVM Reductions for Large Scale Data."</a> <em>IEEE TNNLS</em> 25, no. 6, pp. 1086–1097, 2015.</li>
+        <li><strong>Raghvendra Mall</strong>, Mohammed El Anbari, Halima Bensmail and Johan A.K. Suykens. "Primal-Dual Framework for Feature Selection Using Least Squares Support Vector Machines." <em>COMAD</em>, India, 2013.</li>
+        <li><strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "Sparse Reductions for Fixed-Size Least Squares Support Vector Machines on Large Scale Data." <em>PAKDD</em>, Gold Coast, Australia, 2013.</li>
+        <li>Mandar Chandorkar, <strong>Raghvendra Mall</strong>, Oliver Lauwers, Johan A.K. Suykens and Bart De Moor. <a href="https://ieeexplore.ieee.org/document/7376656/" target="_blank">"Fixed-Size Least Squares Support Vector Machines: Scala Implementation for Large Scale Classification."</a> <em>IEEE SSCI CIBD</em>, 2015.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Hierarchical Kernel Spectral Clustering Methods</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Siamak Mehrkanoon and Johan A.K. Suykens. "Identifying Intervals for Hierarchical Clustering using the Gershgorin Circle Theorem." <em>Pattern Recognition Letters</em> 55, pp. 1–7, 2015.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. <a href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0099966" target="_blank">"Multilevel Hierarchical Kernel Spectral Clustering for Real-Life Large Scale Complex Networks."</a> <em>PLoS One</em>, e99966, vol. 9, no. 6, 2014.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Agglomerative Hierarchical Kernel Spectral Clustering for Large Scale Networks." <em>ESANN</em>, Bruges, 2014.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Agglomerative Hierarchical Kernel Spectral Data Clustering." <em>IEEE SSCI CIDM</em>, Orlando, USA, 2014.</li>
+        <li><strong>Raghvendra Mall</strong>, Siamak Mehrkanoon, Rocco Langone and Johan A.K. Suykens. <a href="https://ieeexplore.ieee.org/document/6889474" target="_blank">"Optimal Reduced Sets for Sparse Kernel Spectral Clustering."</a> <em>IJCNN</em>, Beijing, China, 2014.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Highly Sparse Reductions to Kernel Spectral Clustering." <em>PREMI</em>, Kolkata, India, 2013.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Ranking Overlap and Outlier Points in Data using Soft Kernel Spectral Clustering." <em>ESANN</em>, Bruges, 2015.</li>
+        <li><strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "Kernel Spectral Document Clustering Using Unsupervised Precision-Recall Metrics." <em>IJCNN</em>, Killarney, Ireland, 2015.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Kernel Spectral Clustering for Large Data</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Halima Bensmail, Rocco Langone, Carolina Varon and Johan A.K. Suykens. "Denoised Kernel Spectral Data Clustering." <em>IJCNN</em>, Vancouver, Canada, 2016.</li>
+        <li>Rocco Langone, <strong>Raghvendra Mall</strong>, Vilen Jumutcs and Johan A.K. Suykens. "Fast-in memory spectral clustering using a fixed-size approach." <em>ESANN</em>, Bruges, Belgium, 2016.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "Self-Tuned Kernel Spectral Clustering for Large Scale Networks." <em>IEEE BigData</em>, California, USA, 2013.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. <a href="https://www.mdpi.com/1099-4300/15/5/1567/htm" target="_blank">"Kernel Spectral Clustering for Big Data Networks."</a> <em>Entropy</em>, Special Issue: Big Data, 13, no. 5, pp. 1567–1586, 2013.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Sampling Techniques for Big Data Learning</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Vilen Jumucs, Rocco Langone and Johan A.K. Suykens. "Representative Subsets for Big Data Learning using k-NN Graphs." <em>IEEE BigData</em>, Washington D.C., USA, 2014.</li>
+        <li><strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. "FURS: Fast and Unique Representative Subset selection retaining Large Scale Community Structure." <em>Social Network Analysis and Mining</em> 3, no. 4, pp. 1075–1095, 2013.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Miscellaneous (Doctoral Studies)</h3>
+      <ol class="pub-list" start="1">
+        <li>Siamak Mehrkanoon, Mauricio Agudelo, <strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "Hierarchical Semi-Supervised Clustering using KSC based model." <em>IJCNN</em>, Killarney, Ireland, 2015.</li>
+        <li>Rocco Langone, <strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "Clustering Data over Time using Kernel Spectral Clustering with Memory." <em>IEEE SSCI CIDM</em>, Orlando, USA, 2014.</li>
+        <li>Siamak Mehrkanoon, Carlos Alzate, <strong>Raghvendra Mall</strong>, Rocco Langone and Johan A.K. Suykens. <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6822553" target="_blank">"Multiclass Semi-supervised Learning based upon Kernel Spectral Clustering."</a> <em>IEEE TNNLS</em> 6, no. 99, pp. 1–14, 2014.</li>
+        <li>Rocco Langone, <strong>Raghvendra Mall</strong> and Johan A.K. Suykens. "Soft Kernel Spectral Clustering." <em>IJCNN</em>, Dallas, USA, 2013.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Hot Topic Analysis from News Feeds</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Nahil Jain and Vikram Pudi. "Detecting Correlations between Hot Days in News Feeds." <em>KDIR</em>, Paris, France, 2011.</li>
+        <li><strong>Raghvendra Mall</strong>, Neeraj Bagdia and Vikram Pudi. <a href="http://www.cse.iitb.ac.in/~comad/2009/proceedings/R1_4.pdf" target="_blank">"Variations and Trends in Hot Topics in News Feeds."</a> <em>COMAD</em>, Mysore, India, 2009.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Incremental GNG based Document Clustering</h3>
+      <ol class="pub-list" start="1">
+        <li>Jean-Charles Lamirel, <strong>Raghvendra Mall</strong> and Mumtaz Ahmad. <a href="http://link.springer.com/chapter/10.1007%2F978-3-642-21822-4_3" target="_blank">"Comparative Behaviour of Recent Incremental and Non-incremental Clustering Methods on Text."</a> <em>IEA/AIE</em>, USA, 2011.</li>
+        <li>Jean-Charles Lamirel, <strong>Raghvendra Mall</strong>, Pascal Cuxac and Ghada Safi. <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6033326" target="_blank">"Variations to Incremental Growing Neural Gas Algorithm based on Label Maximization."</a> <em>IJCNN</em>, USA, 2011.</li>
+        <li>Jean-Charles Lamirel, <strong>Raghvendra Mall</strong>, Shadi Al Shehabi and Ghada Safi. <a href="http://link.springer.com/chapter/10.1007%2F978-3-642-21566-7_26" target="_blank">"A New Label Maximization based Incremental Neural Clustering Approach."</a> <em>WSOM</em>, Espoo, Finland, 2011.</li>
+        <li>Jean-Charles Lamirel, Pascal Cuxac, <strong>Raghvendra Mall</strong> and Ghada Safi. <a href="http://link.springer.com/chapter/10.1007%2F978-3-642-28320-8_18" target="_blank">"A New Efficient and Unbiased Approach for Clustering Quality Evaluation."</a> <em>PAKDD Workshops</em>, Australia, 2011.</li>
+      </ol>
+    </div>
+
+    <div class="pub-section">
+      <h3>Master Thesis</h3>
+      <ol class="pub-list" start="1">
+        <li><strong>Raghvendra Mall</strong>, Prakhar Jain and Vikram Pudi. <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5670019" target="_blank">"PERFICT: Perturbed Frequent Itemset Based Classification Technique."</a> <em>ICTAI</em>, Arras, France, 2010.</li>
+        <li><strong>Raghvendra Mall</strong>, Prakhar Jain, Vikram Pudi and Bipin Indurkiya. <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=5599785" target="_blank">"PERICASA."</a> <em>ICCI</em>, China, 2010.</li>
+      </ol>
+    </div>
+
+    <p style="font-size:.82rem;color:var(--muted);margin-top:24px;">* equally contributing authors &nbsp;·&nbsp; + corresponding author &nbsp;·&nbsp; <span class="pub-star">★</span> high impact factor (IF &gt; 10)</p>
+  </main>
+</div>
+
+<!-- ===== CODES ===== -->
+<div id="page-codes" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
+      <div class="hero-text"><h1>Codes & Software</h1><div class="hindi">सॉफ्टवेयर</div><p>Open-source tools, R packages, web servers, and reproducible research artifacts from Dr. Mall's lab.</p></div>
+    </div>
+  </div>
+  <main>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0STlm_656JFQEqqtDeWIcEMMsvs_EmMCPgK1vu8dpFQ2tjGUfShmZsfEqHgRWuH8pHJr2mL7NEc4Bti2FulIzB8bxko59QCJPEzHvu_HO2emLJ1x9c5aYC1PdSztVUKHiwRuHdZeIg2S37mxAOKQadfu1yZoEpT0DAkLcS5IoT7cfYuJpvRFxaA4Y8fa1asYS95UYTAKwNvHHCmiRBW-IA02cCtFNsFgulCGi6k=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>Benchmarking Protein Language Models for Crystallization</h4>
+        <p><a href="https://github.com/raghvendra5688/crystallization_benchmark" target="_blank">GitHub</a> · <em>Scientific Reports</em>, 2025</p>
+        <ul>
+          <li>Benchmarked ESM2, Ankh, ProtT5, XtrimoPGLM, SaProt for protein crystallization prediction.</li>
+          <li>CNN/LSTM on per-residue features for three independent test sets.</li>
+          <li>Fine-tuned ProtGPT2 to generate de novo crystallizable proteins.</li>
+          <li>Evaluated and validated stable, well-folded generated proteins.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SR2rFaNXSSwi_o-cYmi4LUq044DhShMPh8_GPPfSltpzUmZYcsRcFWq27YMYJBI_olrf8H7-nQy6kKpm8MletXxqHbU5O77fqNBlMGF2LIRKz0wOv9tWB0syM6VoO9-vlg3Jvt3YSzS9Ga_xIrpZy_Ho-m8LHRH631Ii2M7PtTcp2KCGnOU5nVo7G_WPzjeQy5-Zv9Paw9h_fBbT9ZsMfXXhlaVGC-UM1Ep1cs=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>ICR Analysis: Master Regulators of Immune-Silent Cancer</h4>
+        <p><a href="https://github.com/raghvendra5688/ICR_Analysis" target="_blank">ICR Analysis</a> · <a href="https://data.mendeley.com/datasets/d9ffb7kkzt/3" target="_blank">Data (Mendeley)</a></p>
+        <ul>
+          <li>Identified MRs of hot/cold tumors in 12 cancer types using 4-pipeline consensus.</li>
+          <li>Pan-cancer validation of MRs in 20 cancers across TCGA + PRECOG datasets.</li>
+          <li>Key MRs: L3MBTL1, SALL2, BTRC, PRKCZ, KAT2A, SMARCC2 for immune-silent phenotype.</li>
+          <li>NOTCH1, TGF-β, IL-1, TNF-α identified as conversion therapy targets.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SRlqD3UiWTH4Qun8pcDWGf_oberBzZ0sShm_5t-vjdfJI33qoUTaa1EOrAeF6j3lwCABnBYP5-X2MF4phYFPZIbomeUQdCfpB7d19T9PahRbjRHruYTBkAwNLKlkKdH27L6ZJR_BRoanZX-zt9pLWBzkG68qXSPqRENp7PtBGeUMAvNOuRtK95VtGR2GzOahCdtkVzHpFM7DrfbHTRtHSkdAsoQsxTl1PmU=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>DeepRepurpose: Compound-Viral Protein Activity</h4>
+        <p><a href="https://github.com/raghvendra5688/Drug-Repurposing" target="_blank">DeepRepurpose</a> · <a href="https://machinelearning-protein.qcri.org/start.html" target="_blank">Web Server</a></p>
+        <ul>
+          <li>60k+ compound-viral protein interactions from PubChem and ChEMBL.</li>
+          <li>4 end-to-end deep learning models from SMILES + protein primary sequences.</li>
+          <li>Consensus framework (Pearson r=0.916) outperforms individual models.</li>
+          <li>47 ranked compounds validated by molecular docking against SARS-CoV-2.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SSQP0OIdd__Vh1qwBi1650hxD7hZsnWw1f3WzBdealOSfFagZiZVoPQgLxnTpdffmRfdrjLe5cSgkOPOvKxjov86sTQcQwJ5ERyehW1UE0EMJIO_mcVy7rq13mHeceh6IgxK0ukHblDfkJ0-YDqRp6Wlgy5SX5hdEZ9GZHv82wlgxk2AYCUY_Bk2cdKyavaQ0GCgGtW=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>RGBM — R Package on CRAN</h4>
+        <p><a href="https://cran.r-project.org/web/packages/RGBM/index.html" target="_blank">RGBM</a> · <a href="https://drive.google.com/file/d/0B8p27qNl8kNjYUhGUDQ5bW1YUWNna252bFRXV0N5b0FHbEhF/view" target="_blank">Tutorial</a> · <em>Nucleic Acids Research</em>, 2018</p>
+        <ul>
+          <li>Regularized GBMs for inferring Gene Regulatory Networks from RNA-Seq, microarrays, time-series and CRISPR data.</li>
+          <li>Tikonov L-curve regularization on edge-weight distributions to determine the optimal set of TFs per gene.</li>
+          <li>Incorporates prior knowledge via mechanistic active binding networks (cis-regulatory motifs).</li>
+          <li>Outperforms ARACNE, GENIE, ENNET by 10–15% on DREAM Challenge benchmarks.</li>
+          <li>Identifies master regulators of glioma subtypes and FGFR3-TACC3 gene fusions.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0STbErbl_8youSf3xzrDD9Vu8-80qxLa_MCzXu5x6cxT8rQtJAoDr4zFjt0Om2yoFsTHxlnqn1ZAwI2FgXGaBEzUNACqUM0_J8SBiSHkk2hMDNdC2pNdzyKoaU9-dzGz28kLCxbhsq_abO1Wzo__hwCug=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>DiffNet — R Package on CRAN</h4>
+        <p><a href="https://cran.r-project.org/web/packages/DiffNet/index.html" target="_blank">DiffNet</a> · <em>BMC Systems Biology</em>, 2017</p>
+        <ul>
+          <li>Detects statistically significant differences (sub-networks) between paired biological networks.</li>
+          <li>Generalized Hamming Distance with improved model selection criterion and asymptotic p-values.</li>
+          <li>10–15x faster than SOTA on dense random geometric networks with 5–10% higher AUC, Precision/Recall and Kappa.</li>
+          <li>Applied to identify regulatory differences between IDH-mutant and IDH-wild-type glioma cancer.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <img class="code-img" src="https://lh3.googleusercontent.com/sitesv/APaQ0SRwvkgA9o9YP1hq0op3XsxjJuU1A7N4mW2TciFr4qVaJuE8oT0yL3zp1P0BslEIhsDPf3mAx9A6h4WQuKjzwuAFqVDqBGlwm9rCOYTiS1zZ7bS7iqNxqXKbcrJIitJwUpYgafWNUrxhu85as5mDfgMwkakf7CWV5m4jxHys5BLNFtwk_R7dg7LcOAft5mP0Zk5cw-Z=w400" onerror="this.style.background='#dbeafe';this.src=''"/>
+      <div>
+        <h4>Netgram: Community Evolution Visualization</h4>
+        <p><a href="https://www.esat.kuleuven.be/stadius/ADB/mall/softwareNetgram.php" target="_blank">Netgram</a></p>
+        <ul>
+          <li>Tracks birth, death, merge, split, growth & shrinkage of communities.</li>
+          <li>Independent of the clustering algorithm used.</li>
+          <li>Greedy ordering to minimize cross-talk between communities over time.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="code-proj">
+      <div class="code-img" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#1e40af;text-align:center;padding:6px;line-height:1.3;">KSC<br/>Net</div>
+      <div>
+        <h4>KSC-Net: Kernel Spectral Clustering for Big Data Networks</h4>
+        <p><a href="https://www.esat.kuleuven.be/stadius/ADB/mall/softwareMHKSC.php" target="_blank">MHKSC</a> · Linux: <a href="https://www.esat.kuleuven.be/stadius/ADB/mall/downloads/KSCnet_Linux_v2.zip" target="_blank">KSCnet Linux</a> · Windows: <a href="https://www.esat.kuleuven.be/stadius/ADB/mall/downloads/KSCnet_Windows_v2.zip" target="_blank">KSCnet Windows</a> · <em>Entropy</em>, 2013 · <em>PLoS One</em>, 2014</p>
+        <ul>
+          <li>Handles networks up to 10⁷ nodes and 10⁹ edges in under 10 minutes on standard hardware (8–16 GB RAM, MATLAB 2011+).</li>
+          <li>Hierarchical (MHKSC) and flat community extraction using a primal-dual framework with out-of-sample extension.</li>
+          <li>Overcomes the resolution limit of Louvain method and large-community bias of OSLOM.</li>
+          <li>Self-tuned model selection (number of communities k) via "Balance Angular Fitting" or self-tuned approach.</li>
+          <li>Runs on both Linux and Windows on large-scale sparse complex networks.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== COLLABORATORS ===== -->
+<div id="page-collaborators" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
+      <div class="hero-text"><h1>Collaborators</h1><div class="hindi">सहयोगी</div><p>A broad international portfolio spanning health informatics, immunology, systems biology, and machine learning.</p></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <div class="sec-title">🌍 Active Collaborators</div>
+      <div class="collab-grid">
+        <div class="collab-card"><div class="collab-icon">🧬</div><div><h4><a href="https://sites.google.com/site/sukritsite/" target="_blank">Prof. Sukrit Gupta</a></h4><p>IIT Ropar, India<br/>Computational Biology · Spatial Imaging Multi-omics</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🦠</div><div><h4><a href="https://biosci.snu.ac.kr/en/people/faculty?mode=view&profidx=109" target="_blank">Prof. Rajendra Karki</a></h4><p>Seoul National University, South Korea<br/>Computational Innate Immunology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🤖</div><div><h4><a href="https://www.hbku.edu.qa/en/staff/dr-halima-bensmail" target="_blank">Prof. Halima Bensmail</a></h4><p>QCRI / Texas A&M Qatar<br/>Applied Machine Learning</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🔬</div><div><h4><a href="https://www.sidra.org/research/our-research/principal-investigators/wouter-rl-hendrickx-phd" target="_blank">Prof. Wouter Hendrickx</a></h4><p>Sidra Medicine, Qatar<br/>Computational Cancer Immunology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🎗️</div><div><h4><a href="https://www.hbku.edu.qa/en/qbri/research-teams-research-group_dr-julie-decock" target="_blank">Prof. Julie Decock</a></h4><p>Qatar Biomedical Research Institute<br/>Computational Cancer Biology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🧠</div><div><h4><a href="https://med.miami.edu/faculty/michele-ceccarelli" target="_blank">Prof. Michele Ceccarelli</a></h4><p>U. Miami Miller School of Medicine & U. Naples Federico II<br/>Systems Biology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🏥</div><div><h4><a href="https://www.stjude.org/directory/k/thirumala-devi-kanneganti.html" target="_blank">Prof. Thirumala Devi-Kanneganti</a></h4><p>St. Jude Children's Research Hospital, USA<br/>Computational Innate Immunology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">📊</div><div><h4><a href="https://scholar.google.com/citations?user=3OWxFhYAAAAJ" target="_blank">Dr. Joao Palotti</a></h4><p>Scale AI<br/>Health Informatics</p></div></div>
+        <div class="collab-card"><div class="collab-icon">🔭</div><div><h4><a href="https://www.wakehealth.edu/providers/m/lance-david-miller" target="_blank">Prof. Lance Miller</a></h4><p>Wake Forest School of Medicine, USA<br/>Computational Cancer Immunology</p></div></div>
+        <div class="collab-card"><div class="collab-icon">💊</div><div><h4><a href="https://scholar.google.com/citations?user=VBDjFtUAAAAJ" target="_blank">Prof. Davide Bedognetti</a></h4><p>Kite Pharmaceuticals, USA<br/>Computational Cancer Immunology</p></div></div>
+      </div>
+    </section>
+    <section>
+      <div class="sec-title">🤝 Collaboration Opportunities</div>
+      <div class="contact-box" style="font-size:.95rem;line-height:1.8;">
+        <strong>Dr. Mall is actively open to collaborations</strong> with:<br/>
+        &bull; M.S. and PhD students pursuing top-tier publications at the intersection of <strong>AI + biologics</strong><br/>
+        &bull; Established researchers in computational immunology, multi-omics, and protein ML<br/>
+        &bull; Seed and funded startups working at the intersection of <strong>AI + biological sciences</strong> (cancer, infectious, and non-communicable diseases)<br/><br/>
+        Reach out via <a href="https://www.researchgate.net/profile/Raghvendra_Mall" target="_blank">ResearchGate</a> or <a href="https://scholar.google.com/citations?hl=en&user=CfwEb1EAAAAJ" target="_blank">Google Scholar</a>.
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div id="page-contact" class="page">
+  <div class="hero" style="padding:44px 24px 40px;">
+    <div class="hero-inner" style="grid-template-columns:1fr;">
+      <div class="hero-text"><h1>Reach Out</h1><div class="hindi">संपर्क करें</div><p>Connect for research collaborations, speaking invitations, advisory roles, or academic inquiries.</p></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <div class="sec-title">📬 Academic Profiles</div>
+      <div class="contact-grid">
+        <div class="contact-item" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;grid-column:1/-1;">
+          <h4 style="color:#1e40af;">📧 Email</h4>
+          <a href="mailto:raghvendramall@ieee.org" style="font-size:1rem;font-weight:700;color:#1d4ed8;">raghvendramall@ieee.org</a>
+          <p style="font-size:.82rem;color:var(--muted);margin-top:2px;">Preferred channel for collaborations, advisory inquiries &amp; speaking invitations</p>
+        </div>
+        <div class="contact-item"><h4>🔬 ResearchGate</h4><a href="https://www.researchgate.net/profile/Raghvendra_Mall" target="_blank">researchgate.net →</a></div>
+        <div class="contact-item"><h4>🆔 ORCID</h4><a href="https://orcid.org/0000-0003-1779-3150" target="_blank">0000-0003-1779-3150 →</a></div>
+        <div class="contact-item"><h4>🔗 Frontiers Loop</h4><a href="https://loop.frontiersin.org/people/1072179/overview" target="_blank">loop.frontiersin.org →</a></div>
+        <div class="contact-item"><h4>🧬 PubMed</h4><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Raghvendra+Mall" target="_blank">ncbi.nlm.nih.gov →</a></div>
+        <div class="contact-item"><h4>📊 Kaggle</h4><a href="https://www.kaggle.com/raghvendrakul" target="_blank">kaggle.com/raghvendrakul →</a></div>
+      </div>
+    </section>
+    <section>
+      <div class="sec-title">✉️ Collaboration & Advisory</div>
+      <div class="contact-box">
+        <strong>Looking to collaborate?</strong><br/><br/>
+        Dr. Mall is interested in:<br/>
+        &bull; Research partnerships with M.S. / PhD students on AI + biologics<br/>
+        &bull; Advisory or co-founder roles in biotech / healthtech startups<br/>
+        &bull; Invited talks, keynotes, and symposium participation<br/>
+        &bull; Editorial and review roles in translational medicine and bioinformatics<br/><br/>
+        The best way to reach out is via email at <strong><a href="mailto:raghvendramall@ieee.org">raghvendramall@ieee.org</a></strong>, or through <strong><a href="https://www.researchgate.net/profile/Raghvendra_Mall" target="_blank">ResearchGate</a></strong>.
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>© 2026 Dr. Raghvendra Mall &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?hl=en&user=CfwEb1EAAAAJ" target="_blank">Google Scholar</a> &nbsp;·&nbsp; <a href="https://orcid.org/0000-0003-1779-3150" target="_blank">ORCID</a> &nbsp;·&nbsp; <a href="https://www.researchgate.net/profile/Raghvendra_Mall" target="_blank">ResearchGate</a> &nbsp;·&nbsp; <a href="https://www.kaggle.com/raghvendrakul" target="_blank">Kaggle</a></p>
+  <p style="margin-top:10px;font-size:.78rem;color:#64748b;">✦ Website designed &amp; powered by <a href="https://claude.ai" target="_blank" style="color:#93c5fd;font-weight:600;">Claude</a> (Anthropic)</p>
+</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
