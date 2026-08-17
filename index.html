@@ -374,6 +374,18 @@ footer a{color:#93c5fd;}
 
     <div class="proj">
       <div class="proj-header">
+        <img class="proj-img" src="CLIP-AML.jpg" alt="CLIP-AML" onerror="this.style.background='#dbeafe';this.src=''"/>
+        <div>
+          <h3>CLIP-AML: Contrastive Learning Framework for AML treatment response prediction</h3>
+          <div class="pub-ref">Oral presentation, ACM-BCB 2026 <a href="https://dl.acm.org/doi/full/10.1145/3807503.3819469" target="_blank">Original Paper</a></div>
+        </div>
+      </div>
+      <p><strong>CLIP-AML (ACM-BCB 2026)</strong> &mdash; Our solution was a dual-encoder contrastive framework: patient multi-omics &rarr; patient encoder, drug descriptors + fingerprints &rarr; drug encoder &rarr; both projected into a shared embedding space &rarr; trained with a joint MAE + bidirectional InfoNCE (attract/repel) objective &rarr; outputs ex vivo drug sensitivity (AUC) per patient&ndash;drug pair, plus zero-shot ranking of unseen drugs. BeatAML test: Pearson r = 0.654, MAE = 39.31.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Contrastive Learning</span><span class="tag">Multi-omics Integration</span></div>
+    </div>
+    
+    <div class="proj">
+      <div class="proj-header">
         <img class="proj-img" src="Patchwork.png" alt="Patchwork" onerror="this.style.background='#dbeafe';this.src=''"/>
         <div>
           <h3>Patchwork: Reconstructing Gene Expression in Inflammatory Bowel Disease from Vision and Attention</h3>
